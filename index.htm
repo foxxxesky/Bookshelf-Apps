@@ -57,15 +57,15 @@
             <form>
               <div class="mb-3">
                 <label for="judul_buku" class="form-label">Judul Buku</label>
-                <input type="text" class="form-control" id="judul_buku" />
+                <input type="text" class="form-control" id="judul_buku" required />
               </div>
               <div class="mb-3">
                 <label for="penulis" class="form-label">Penulis</label>
-                <input type="text" class="form-control" id="penulis" />
+                <input type="text" class="form-control" id="penulis" required />
               </div>
               <div class="mb-3">
                 <label for="tahun" class="form-label">Tahun</label>
-                <input type="text" class="form-control" id="tahun" />
+                <input type="text" class="form-control" id="tahun" required />
               </div>
               <div class="text-center">
                 <button type="submit" class="btn btn-warning text-light">Belum Selesai Dibaca</button>
@@ -74,6 +74,30 @@
               </div>
             </form>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Belum Selesai Dibaca -->
+    <section>
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <h5>Belum Selesai Dibaca</h5>
+          </div>
+          <div id="uncompleted_read"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Selesai Dibaca -->
+    <section>
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <h5>Selesai Dibaca</h5>
+          </div>
+          <div id="completed_read"></div>
         </div>
       </div>
     </section>
