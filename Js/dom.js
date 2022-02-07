@@ -13,11 +13,12 @@ function readingBooks(bookTitle, penulisBuku, tahunTerbit) {
   const textTahun = document.createElement('p');
   textTahun.innerText = tahunTerbit;
 
-  const textContainer = document.createElement('div');
-  textContainer.classList.add('pt-3');
-  textContainer.append(textTitle, textPenulis, textTahun);
+  //   add content
+  const content = document.createElement('div');
+  content.classList.add('pt-3');
+  content.append(textTitle, textPenulis, textTahun);
 
-  return textContainer;
+  return content;
 }
 
 function addBooks() {
