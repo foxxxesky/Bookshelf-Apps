@@ -15,10 +15,19 @@ function readingBooks(bookTitle, penulisBuku, tahunTerbit) {
 
   //   add content
   const content = document.createElement('div');
-  content.classList.add('pt-3');
   content.append(textTitle, textPenulis, textTahun);
 
-  return content;
+  //   add card
+  const card = document.createElement('div');
+  card.classList.add('card', 'p-3');
+  card.append(content);
+
+  //   padding
+  const padding = document.createElement('div');
+  padding.classList.add('pt-3', 'pb-3');
+  padding.append(card);
+
+  return padding;
 }
 
 function addBooks() {
