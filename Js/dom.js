@@ -1,8 +1,10 @@
 const UNCOMPLETED_READING_BOOKS = 'uncompleted';
+const COMPLETED_READING_BOOKS = 'completed';
 
 function readingBooks(bookTitle, penulisBuku, tahunTerbit) {
   // Judul
   const textTitle = document.createElement('h5');
+  textTitle.classList.add('pt-3');
   textTitle.innerText = bookTitle;
 
   //   Penulis
@@ -17,17 +19,9 @@ function readingBooks(bookTitle, penulisBuku, tahunTerbit) {
   const content = document.createElement('div');
   content.append(textTitle, textPenulis, textTahun);
 
-  //   add card
-  const card = document.createElement('div');
-  card.classList.add('card', 'p-3');
-  card.append(content);
+  content.append(createSelesaiDibacaButton());
 
-  //   padding
-  const padding = document.createElement('div');
-  padding.classList.add('pt-3', 'pb-3');
-  padding.append(card);
-
-  return padding;
+  return content;
 }
 
 function addBooks() {
@@ -43,4 +37,25 @@ function addBooks() {
 
   const books = readingBooks(bookTitle, penulisBuku, tahunTerbit);
   uncompletedReadingBooks.append(books);
+}
+
+function createButton(eventListener) {
+  const button = document.createElement('button');
+  button.classList.add('btn', 'btn-success');
+  button.innerText = 'Selesai Dibaca';
+  button.addEventListener('click', function (event) {
+    eventListener(event);
+  });
+
+  return button;
+}
+
+function addBookToCompleted(taskElement) {
+  taskElement.remove();
+}
+
+function createSelesaiDibacaButton() {
+  return createButton(function (event) {
+    addBookToCompleted(event.target.parentElement);
+  });
 }
