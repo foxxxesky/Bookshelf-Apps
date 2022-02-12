@@ -2,7 +2,7 @@ const STORAGE_KEY = 'Bookshelf-Apps';
 
 let Bookshelf = [];
 
-function ifStorageExist() {
+function isStorageExist() {
   if (typeof Storage === undefined) {
     alert("Your Browser Dosen't Support Local Storage");
     return false;
@@ -25,7 +25,7 @@ function loadDataFromStorage() {
 }
 
 function updatedDataToStorage() {
-  if (isStorageExists()) savedData();
+  if (isStorageExist()) savedData();
 }
 
 function composeBookshelfObject(title, author, year, isCompleted) {

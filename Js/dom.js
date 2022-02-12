@@ -1,19 +1,20 @@
 const UNCOMPLETED_READING_BOOKS = 'uncompleted';
 const COMPLETED_READING_BOOKS = 'completed';
+const BOOKSSHELF = 'booksid';
 
-function readingBooks(bookTitle, penulisBuku, tahunTerbit, isCompleted) {
+function readingBooks(title, author, year, isCompleted) {
   // Judul
   const textTitle = document.createElement('h5');
   textTitle.classList.add('pt-3');
-  textTitle.innerText = bookTitle;
+  textTitle.innerText = title;
 
   //   Penulis
   const textPenulis = document.createElement('p');
-  textPenulis.innerText = penulisBuku;
+  textPenulis.innerText = author;
 
   // Tahun
   const textTahun = document.createElement('p');
-  textTahun.innerText = tahunTerbit;
+  textTahun.innerText = year;
 
   //   add content
   const content = document.createElement('div');
@@ -30,22 +31,32 @@ function readingBooks(bookTitle, penulisBuku, tahunTerbit, isCompleted) {
   }
 
   return content;
+  // updatedDataToStorage();
 }
 
 // add reading books
 function addBooks() {
   const uncompletedReadingBooks = document.getElementById(UNCOMPLETED_READING_BOOKS);
+  const completedReadingBooks = document.getElementById(COMPLETED_READING_BOOKS);
 
-  const bookTitle = document.getElementById('judul_buku').value;
-  const penulisBuku = document.getElementById('penulis').value;
-  const tahunTerbit = document.getElementById('tahun').value;
+  const title = document.getElementById('judul_buku').value;
+  const author = document.getElementById('penulis').value;
+  const year = document.getElementById('tahun').value;
+  const completedBook = document.getElementById('isCompleted').checked;
 
-  console.log('judulBuku ' + bookTitle);
-  console.log('penulis ' + penulisBuku);
-  console.log('tahun ' + tahunTerbit);
+  const newbook = readingBooks(title, author, year, completedBook);
+  const newBookObject = composeBookshelfObject(title, author, year, completedBook);
 
-  const books = readingBooks(bookTitle, penulisBuku, tahunTerbit, false);
-  uncompletedReadingBooks.append(books);
+  newbook[BOOKSSHELF] = newBookObject.id;
+  Bookshelf.push(newBookObject);
+
+  if (completedBook) {
+    completedReadingBooks.append(newbook);
+  } else {
+    uncompletedReadingBooks.append(newbook);
+  }
+
+  updatedDataToStorage();
 }
 
 // add books to completed
@@ -110,4 +121,20 @@ function createHapusButton() {
   return createButtonHapus(function (event) {
     addBookToCompleted(event.target.parentElement);
   });
+}
+
+function refreshDataFromBookshelf() {
+  const uncompletedList = document.getElementById(UNCOMPLETED_READING_BOOKS);
+  const completedList = document.getElementById(COMPLETED_READING_BOOKS);
+
+  for (let book of Bookshelf) {
+    const newBook = readingBooks(book.title, book.author, book.year, book.isCompleted);
+    newBook[BOOKSSHELF] = book.id;
+
+    if (book.isCompleted) {
+      completedList.append(newBook);
+    } else {
+      uncompletedList.append(newBook);
+    }
+  }
 }
