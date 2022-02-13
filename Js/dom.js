@@ -10,6 +10,7 @@ function readingBooks(title, author, year, isCompleted) {
 
   //   Penulis
   const textPenulis = document.createElement('p');
+  textPenulis.classList.add('author');
   textPenulis.innerText = author;
 
   // Tahun
@@ -18,6 +19,7 @@ function readingBooks(title, author, year, isCompleted) {
 
   //   add content
   const content = document.createElement('div');
+  content.classList.add('content');
   content.append(textTitle, textPenulis, textTahun);
 
   // span button
@@ -62,12 +64,35 @@ function addBooks() {
 // add books to completed
 
 // remove books
+function removeBook(taskElement) {
+  const book = findBookIndex(taskElement[BOOKSSHELF]);
+  let confirm = window.confirm('Yakin Akan Menghapus Buku ini?');
+  if (confirm) {
+    Bookshelf.slice(book, 1);
+    taskElement.remove();
+    updatedDataToStorage();
+  }
+}
 
 // add back books to uncompleted
 
 // action button
 function addBookToCompleted(taskElement) {
+  const completeReading = document.getElementById(COMPLETED_READING_BOOKS);
+  const title = taskElement.querySelector('.content h5').innerText;
+  const author = taskElement.querySelector('.author').innerText;
+  const year = taskElement.querySelector('.content p').innerText;
+
+  const book = readingBooks(title, author, year, true);
+
+  const find = findBook(taskElement[BOOKSSHELF]);
+  find.isCompleted = true;
+  book[BOOKSSHELF] = book.id;
+
+  completeReading.append(book);
   taskElement.remove();
+
+  updatedDataToStorage();
 }
 
 // create button
@@ -119,7 +144,7 @@ function createBelumSelesaiDibacaButton() {
 
 function createHapusButton() {
   return createButtonHapus(function (event) {
-    addBookToCompleted(event.target.parentElement);
+    removeBook(event.target.parentElement);
   });
 }
 
