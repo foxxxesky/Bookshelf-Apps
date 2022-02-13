@@ -40,9 +40,7 @@ function composeBookshelfObject(title, author, year, isCompleted) {
 
 function findBook(id) {
   for (let book of Bookshelf) {
-    if (book.id === id) {
-      return book;
-    }
+    if (book.id === id) return book;
     return null;
   }
 }

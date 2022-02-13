@@ -72,7 +72,7 @@ function addBookToCompleted(taskElement) {
   const book = readingBooks(title, author, year, true);
 
   const find = findBook(taskElement[BOOKSSHELF]);
-  find.isCompleted = true;
+  // find.isCompleted = true;
   book[BOOKSSHELF] = book.id;
 
   completeReading.append(book);
@@ -82,6 +82,23 @@ function addBookToCompleted(taskElement) {
 }
 
 // add back books to uncompleted
+function undoBooks(taskElement) {
+  const uncompleteReading = document.getElementById(UNCOMPLETED_READING_BOOKS);
+  const title = taskElement.querySelector('.content h5').innerText;
+  const author = taskElement.querySelector('.author').innerText;
+  const year = taskElement.querySelector('.year').innerText;
+
+  const book = readingBooks(title, author, year, false);
+
+  const find = findBook(taskElement[BOOKSSHELF]);
+  // find.isCompleted = false;
+  book[BOOKSSHELF] = book.id;
+
+  uncompleteReading.append(book);
+  taskElement.remove();
+
+  updatedDataToStorage();
+}
 
 // remove books
 function removeBook(taskElement) {
@@ -137,7 +154,7 @@ function createSelesaiDibacaButton() {
 
 function createBelumSelesaiDibacaButton() {
   return createButtonBelumSelesai(function (event) {
-    addBookToCompleted(event.target.parentElement);
+    undoBooks(event.target.parentElement);
   });
 }
 
