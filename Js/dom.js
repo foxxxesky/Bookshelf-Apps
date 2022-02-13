@@ -19,7 +19,7 @@ function readingBooks(title, author, year, isCompleted) {
   textTahun.innerText = year;
 
   //   add content
-  const content = document.createElement('div');
+  const content = document.createElement('article');
   content.classList.add('content');
   content.append(textTitle, textPenulis, textTahun);
 
@@ -34,7 +34,6 @@ function readingBooks(title, author, year, isCompleted) {
   }
 
   return content;
-  // updatedDataToStorage();
 }
 
 // add reading books
@@ -98,6 +97,11 @@ function undoBooks(taskElement) {
   taskElement.remove();
 
   updatedDataToStorage();
+}
+
+// find books
+function findBooks() {
+  //
 }
 
 // remove books
