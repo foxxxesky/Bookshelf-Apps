@@ -173,13 +173,13 @@ function refreshDataFromBookshelf() {
   const completedList = document.getElementById(COMPLETED_READING_BOOKS);
 
   for (let book of Bookshelf) {
-    const newBook = readingBooks(book.title, book.author, book.year, book.isCompleted);
-    newBook[BOOKSSHELF] = book.id;
+    const book = readingBooks(book.title, book.author, book.year, book.isCompleted);
+    book[BOOKSSHELF] = book.id;
 
     if (book.isCompleted) {
-      completedList.append(newBook);
+      completedList.append(book);
     } else {
-      uncompletedList.append(newBook);
+      uncompletedList.append(book);
     }
   }
 }
