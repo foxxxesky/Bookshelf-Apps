@@ -71,7 +71,7 @@ function addBookToCompleted(taskElement) {
   const book = readingBooks(title, author, year, true);
 
   const find = findBook(taskElement[BOOKSSHELF]);
-  // find.isCompleted = true;
+  find.isCompleted = true;
   book[BOOKSSHELF] = book.id;
 
   completeReading.append(book);
@@ -90,7 +90,7 @@ function undoBooks(taskElement) {
   const book = readingBooks(title, author, year, false);
 
   const find = findBook(taskElement[BOOKSSHELF]);
-  // find.isCompleted = false;
+  find.isCompleted = false;
   book[BOOKSSHELF] = book.id;
 
   uncompleteReading.append(book);
@@ -172,11 +172,11 @@ function refreshDataFromBookshelf() {
   const uncompletedList = document.getElementById(UNCOMPLETED_READING_BOOKS);
   const completedList = document.getElementById(COMPLETED_READING_BOOKS);
 
-  for (let book of Bookshelf) {
-    const book = readingBooks(book.title, book.author, book.year, book.isCompleted);
-    book[BOOKSSHELF] = book.id;
+  for (let item of Bookshelf) {
+    const book = readingBooks(item.title, item.author, item.year, item.isCompleted);
+    book[BOOKSSHELF] = item.id;
 
-    if (book.isCompleted) {
+    if (item.isCompleted) {
       completedList.append(book);
     } else {
       uncompletedList.append(book);
