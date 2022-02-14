@@ -54,11 +54,13 @@ function addBooks() {
 
   if (completedBook) {
     completedReadingBooks.append(newbook);
+    updatedDataToStorage();
   } else {
     uncompletedReadingBooks.append(newbook);
+    updatedDataToStorage();
   }
 
-  updatedDataToStorage();
+  // updatedDataToStorage();
 }
 
 // add books to completed
@@ -72,7 +74,7 @@ function addBookToCompleted(taskElement) {
 
   const find = findBook(taskElement[BOOKSSHELF]);
   find.isCompleted = true;
-  book[BOOKSSHELF] = book.id;
+  book[BOOKSSHELF] = find.id;
 
   completeReading.append(book);
   taskElement.remove();
@@ -91,7 +93,7 @@ function undoBooks(taskElement) {
 
   const find = findBook(taskElement[BOOKSSHELF]);
   find.isCompleted = false;
-  book[BOOKSSHELF] = book.id;
+  book[BOOKSSHELF] = find.id;
 
   uncompleteReading.append(book);
   taskElement.remove();
@@ -122,6 +124,7 @@ function createButtonSelesai(eventListener) {
   button.innerText = 'Selesai Dibaca';
   button.addEventListener('click', function (event) {
     eventListener(event);
+    event.stopPropagation();
   });
 
   return button;
@@ -133,6 +136,7 @@ function createButtonBelumSelesai(eventListener) {
   button.innerText = 'Belum Selesai Dibaca';
   button.addEventListener('click', function (event) {
     eventListener(event);
+    event.stopPropagation();
   });
 
   return button;
@@ -144,6 +148,7 @@ function createButtonHapus(eventListener) {
   button.innerText = 'Hapus Buku';
   button.addEventListener('click', function (event) {
     eventListener(event);
+    event.stopPropagation();
   });
 
   return button;

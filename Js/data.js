@@ -38,17 +38,26 @@ function composeBookshelfObject(title, author, year, isCompleted) {
   };
 }
 
-function findBook(id) {
-  for (let book of Bookshelf) {
-    if (book.id === id) return book;
-    return null;
+// function findBook(bookId) {
+//   for (let book of Bookshelf) {
+//     if (book.id === bookId) {
+//       return book;
+//     } else {
+//       return null;
+//     }
+//   }
+// }
+
+function findBook(BookId) {
+  for (book of Bookshelf) {
+    if (book.id === BookId) return book;
   }
 }
 
-function findBookIndex(id) {
+function findBookIndex(bookId) {
   let index = 0;
   for (let book of Bookshelf) {
-    if (book.id == id) {
+    if (book.id == bookId) {
       return index;
     }
     index++;
